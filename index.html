@@ -11,14 +11,13 @@
 <body>
     <div class="greetings">
     <!-- silahkan menambah kata sesuai keinginan dengan <span>text...</span -->
-        <span>H</span>
-        <span>A</span>
-        <span>L</span>
-        <span>L</span>
-        <span>O</span>
+        <span>h</span>
+        <span>i</span>
+        <span>!</span>
+
     </div>
     <div class="description">
-        <span>Nabila ada hadiah spesial buat kamu!!</span>
+        <span>Anna ada hadiah spesial buat kamu!!</span>
     </div>
     <div class="button">
         <button id="playMusic">
@@ -30,14 +29,6 @@
               const audioContext = new AudioContext()
               document.getElementById('playMusic').addEventListener('click', function() {
                 audioContext.resume()
-    var audio = document.getElementById('backgroundMusic');
-    if (audio) {
-      audio.play().then(function() {
-        localStorage.setItem('musicPlaying', 'true');
-      }).catch(function(error) {
-        console.log('Error playing audio:', error);
-      });
-    }
     window.location.href = 'flower.html'
   });
    

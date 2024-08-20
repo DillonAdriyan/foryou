@@ -87,7 +87,8 @@ body {
     transition: opacity 1s ease-in-out;
     position: absolute; /* Sesuaikan posisi sesuai kebutuhan */
     font-family: 'Poppins', cursive;
-    top: 40px; /* Contoh posisi */
+    top: 80px; /* Contoh posisi */
+margin-top: 20px; /* Contoh posisi */
     width: 60%; /* Sesuaikan lebar sesuai kebutuhan */
     text-align: center;
     font-weight: 700;
