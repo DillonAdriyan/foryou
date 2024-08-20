@@ -21,10 +21,28 @@
         <span>Nabila ada hadiah spesial buat kamu!!</span>
     </div>
     <div class="button">
-        <button>
-            <a href="flower.html">Klik disini</a>
-        </button>
-        
+        <button id="playMusic">
+              Klik disini
+              </button>
+ <audio id="backgroundMusic" src="song.mp3"
+              type="audio/mp3"></audio>
+              <script>
+              const audioContext = new AudioContext()
+              document.getElementById('playMusic').addEventListener('click', function() {
+                audioContext.resume()
+    var audio = document.getElementById('backgroundMusic');
+    if (audio) {
+      audio.play().then(function() {
+        localStorage.setItem('musicPlaying', 'true');
+      }).catch(function(error) {
+        console.log('Error playing audio:', error);
+      });
+    }
+    window.location.href = 'flower.html'
+  });
+   
+  </script>
+ 
     </div>
 </body>
 </html>

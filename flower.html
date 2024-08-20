@@ -7,9 +7,20 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" href="img/flowers.png" type="image/x-icon">
     <title>flowers</title>
+    <style></style>
 </head>
 <body class="container">
   <!-- Pembuat code: https://codepen.io/mdusmanansari/pen/BamepLe -->
+  <div class="buttonParent">
+  <button id="play" class="play-button">
+    
+    <div class="icon"><img
+    src="https://d3sxshmncs10te.cloudfront.net/icon/free/svg/1502382.svg?token=eyJhbGciOiJoczI1NiIsImtpZCI6ImRlZmF1bHQifQ__.eyJpc3MiOiJkM3N4c2htbmNzMTB0ZS5jbG91ZGZyb250Lm5ldCIsImV4cCI6MTcyNDQzODE1OSwicSI6bnVsbCwiaWF0IjoxNzI0MTc4OTU5fQ__.4f561bb95b172bcbb400fc2e25a6f4cb04494dd0c1e2a0ad0933dd73d704aaec"
+    width="24px" height="24px" alt=""></div>
+  </button>
+  </div>
+  <div id="lyrics" class="lyrics"></div>
+
     <div class="night"></div>
     <div class="flowers">
       <div class="flower flower--1">
@@ -307,6 +318,108 @@
         </div>
       </div>
     </div>
+     <audio id="audio" src="song.mp3"
+              type="audio/mp3"></audio>
+              
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const playButton = document.getElementById('play');
+    const audio = document.getElementById('audio');
+    const icon = document.querySelector('.icon');
+    const lyricsContainer = document.getElementById('lyrics');
+    
+    let isPlaying = false;
+
+    // Sample LRC data (in a real application, this might be fetched from a file or server)
+    const lyrics = [
+    { start: 0.094, end: 6.006, text: "I should've bought you flowers and held your hand" },
+    { start: 6.100, end: 13.006, text: "Should've gave you all my hours when I had the chance" },
+    { start: 13.100, end: 18.999, text: "Take you to every party cause all you wanted to do was dance" },
+    { start: 19.093, end: 25.999, text: "Now my baby's dancing, but she's dancing with another man" },
+    { start: 30.997, end: 37.003, text: "My pride, my ego, my needs and my selfish ways" },
+    { start: 37.097, end: 42.995, text: "Caused a good strong woman like you to walk out my life" },
+    { start: 43.089, end: 49.996, text: "Now I never, never get to clean up the mess I made" },
+    { start: 50.090, end: 54.994, text: "And it haunts me every time I close my eyes" },
+    { start: 55.088, end: 63.002, text: "It all just sounds like ooh" },
+    { start: 63.096, end: 68.000, text: "Too young, too dumb to realize" },
+    { start: 68.094, end: 75.000, text: "That I should've bought you flowers and held your hand" },
+    { start: 75.094, end: 81.006, text: "Should've gave you all my hours when I had the chance" },
+    { start: 81.100, end: 88.006, text: "Take you to every party cause all you wanted to do was dance" },
+    { start: 88.100, end: 95.006, text: "Now my baby's dancing, but she's dancing with another man" },
+    { start: 95.100, end: 107.999, text: "Although it hurts, I'll be the first to say that I was wrong" },
+    { start: 108.093, end: 114.999, text: "Oh, I know I'm probably much too late to try and apologize for my mistakes" },
+    { start: 115.093, end: 119.997, text: "But I just want you to know" },
+    { start: 120.091, end: 128.005, text: "I hope he buys you flowers, I hope he holds your hand" },
+    { start: 128.099, end: 135.005, text: "Give you all his hours when he has the chance" },
+    { start: 135.099, end: 140.998, text: "Take you to every party cause I remember how much you loved to dance" },
+    { start: 141.092, end: 147.998, text: "Do all the things I should've done when I was your man" },
+    { start: 148.092, end: 152.002, text: "Do all the things I should've done" }
+];
+
+function updateLyrics() {
+    const currentTime = audio.currentTime;
+    let displayed = false;
+
+    for (const lyric of lyrics) {
+        if (currentTime >= lyric.start && currentTime <= lyric.end) {
+            if (!displayed) {
+                lyricsContainer.innerText = lyric.text;
+                lyricsContainer.classList.remove('fade-out');
+                lyricsContainer.classList.add('fade-in');
+                displayed = true;
+            }
+            break;
+        } else {
+            if (displayed) {
+                lyricsContainer .classList.remove('fade-in');
+                lyricsContainer.classList.add('fade-out');
+                displayed = false;
+            }
+        }
+    }
+
+    if (!displayed) {
+        lyricsContainer.innerText = '';
+    }
+}
+
+audio.addEventListener('timeupdate', updateLyrics);
+
+
+  
+
+    playButton.addEventListener('click', function () {
+        if (isPlaying) {
+            audio.pause();
+            icon.classList.remove('spin');
+        } else {
+            audio.play();
+            icon.classList.add('spin');
+        }
+        isPlaying = !isPlaying;
+    });
+
+    audio.addEventListener('pause', function () {
+        icon.classList.remove('spin');
+        isPlaying = false;
+    });
+
+    audio.addEventListener('ended', function () {
+        icon.classList.remove('spin');
+        isPlaying = false;
+    });
+
+    audio.addEventListener('timeupdate', function () {
+        if (isPlaying) {
+            updateLyrics(audio.currentTime);
+        }
+    });
+});
+</script>
+
+
+
+
     <script src="main.js"></script>
   </body>
 </html>
